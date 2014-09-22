@@ -30,7 +30,7 @@ tweaking to get it to that state.
 
 If there are duplicate tasks, a warning is added to the code.
 
-# How does it work? / Hacking on grunt2gulp
+# How does it work?
 
 It loads up the Gruntfile and emulates Grunt's API. When it's done
 looping through all the tasks in the grunt config, it shoves them into
@@ -38,6 +38,8 @@ definitions or tasks. Definitions are non-objects, like strings, which
 need to be declared as variables when using Gulp. Tasks are converted
 into Gulp tasks but some special cases have to be handled, such as
 Karma and Watch.
+
+## Hacking on grunt2gulp
 
 The code is dirty because Grunt is very permissive in its input. You
 can specify files in multiple ways: as a string, as a list of strings,
