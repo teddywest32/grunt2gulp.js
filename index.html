@@ -1,0 +1,107 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>Grunt2gulp.js by omouse</title>
+
+    <link rel="stylesheet" href="stylesheets/styles.css">
+    <link rel="stylesheet" href="stylesheets/pygment_trac.css">
+    <script src="javascripts/scale.fix.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <div class="wrapper">
+      <header>
+        <h1>Grunt2gulp.js</h1>
+        <p>Converts Grunt task files, gruntfile.js, to Gulp files.</p>
+        <p class="view"><a href="https://github.com/omouse/grunt2gulp.js">View the Project on GitHub <small>omouse/grunt2gulp.js</small></a></p>
+        <ul>
+          <li><a href="https://github.com/omouse/grunt2gulp.js/zipball/master">Download <strong>ZIP File</strong></a></li>
+          <li><a href="https://github.com/omouse/grunt2gulp.js/tarball/master">Download <strong>TAR Ball</strong></a></li>
+          <li><a href="https://github.com/omouse/grunt2gulp.js">View On <strong>GitHub</strong></a></li>
+        </ul>
+      </header>
+      <section>
+        <h1>
+<a name="grunt2gulp" class="anchor" href="#grunt2gulp"><span class="octicon octicon-link"></span></a>grunt2gulp</h1>
+
+<p>Converts a Gruntfile.js to a gulp-compliant file. Why? Because if
+you're going to create a new tool to replace an old one, why not
+automate the process of porting configuration files over.</p>
+
+<p>In the future, a standard for building JavaScript files should emerge
+and be usable by whatever build tools exist. Maybe something like GNU
+Make? Ah, but that's a mere fantasy...</p>
+
+<h2>
+<a name="usage" class="anchor" href="#usage"><span class="octicon octicon-link"></span></a>Usage</h2>
+
+<p>Print out a gulp file to standard output:</p>
+
+<pre><code>grunt2gulp.js Gruntfile.js
+</code></pre>
+
+<p>Save the generated gulp file:</p>
+
+<pre><code>grunt2gulp.js Gruntfile.js &gt; gulpfile.js
+</code></pre>
+
+<h2>
+<a name="drawbacks-caveats" class="anchor" href="#drawbacks-caveats"><span class="octicon octicon-link"></span></a>Drawbacks, Caveats</h2>
+
+<p>This is a very very rough tool, you will <strong>need</strong> to go over the
+generated gulp file to ensure that it works and is correct.</p>
+
+<p>To see the difference, run the <code>examples/simple-gruntfile.js</code> through
+grunt2gulp and compare it to <code>examples/simple-gulpfile.js</code>. It got 90%
+of the way to a complete conversion though and it took only a bit of
+tweaking to get it to that state.</p>
+
+<p>If there are duplicate tasks, a warning is added to the code.</p>
+
+<h1>
+<a name="how-does-it-work" class="anchor" href="#how-does-it-work"><span class="octicon octicon-link"></span></a>How does it work?</h1>
+
+<p>It loads up the Gruntfile and emulates Grunt's API. When it's done
+looping through all the tasks in the grunt config, it shoves them into
+definitions or tasks. Definitions are non-objects, like strings, which
+need to be declared as variables when using Gulp. Tasks are converted
+into Gulp tasks but some special cases have to be handled, such as
+Karma and Watch.</p>
+
+<h2>
+<a name="hacking-on-grunt2gulp" class="anchor" href="#hacking-on-grunt2gulp"><span class="octicon octicon-link"></span></a>Hacking on grunt2gulp</h2>
+
+<p>The code is dirty because Grunt is very permissive in its input. You
+can specify files in multiple ways: as a string, as a list of strings,
+or within a files property as a string or list. If Grunt were more
+modular it would be possible to just rip out the parser that Grunt
+uses to turn a config into a set of tasks without also importing the
+task running capability and all the other stuff.</p>
+
+<p>The core functions you will want to check out are <code>processGruntTask</code>
+and <code>processGruntConfig</code>.</p>
+
+<h1>
+<a name="license" class="anchor" href="#license"><span class="octicon octicon-link"></span></a>License</h1>
+
+<p>Licensed under the MIT license.</p>
+
+<p>Copyright (C) 2014 Rudolf Olah <a href="mailto:omouse@gmail.com">omouse@gmail.com</a></p>
+
+<p>See <a href="./LICENSE">LICENSE</a> for full text of license.</p>
+      </section>
+    </div>
+    <footer>
+      <p>Project maintained by <a href="https://github.com/omouse">omouse</a></p>
+      <p>Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/orderedlist">orderedlist</a></p>
+    </footer>
+    <!--[if !IE]><script>fixScale(document);</script><![endif]-->
+    
+  </body>
+</html>
