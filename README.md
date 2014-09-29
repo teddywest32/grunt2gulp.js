@@ -53,7 +53,7 @@ and `processGruntConfig`.
 
 # License
 
-Licensed under the MIT license.
+Licensed under the GPL.
 
 Copyright (C) 2014 Rudolf Olah <omouse@gmail.com>
 
