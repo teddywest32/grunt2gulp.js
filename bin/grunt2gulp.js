@@ -199,7 +199,10 @@ function gruntConverter() {
         } else {
           src = undefined;
           dest = undefined;
-          if ('src' in options[option]) {
+          if (typeof(options[option]) === 'string') {
+            // @todo handle this case
+            out('// TODO: ' + option + ', ' + options[option]);
+          } else if ('src' in options[option]) {
             if (typeof options[option].src === 'string') {
               src = [options[option].src];
             } else {
