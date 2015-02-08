@@ -366,6 +366,12 @@ function gruntConverter() {
   }
 
   /**
+   * Log object.
+   *
+   */
+  this.log = {};
+
+  /**
    * Processes the given grunt config.
    *
    * @param {Object.<String, Object>} config
