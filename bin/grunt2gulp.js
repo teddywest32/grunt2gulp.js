@@ -1,56 +1,139 @@
 #!/usr/bin/env node
+/**
+ * @module grunt2gulp
+ */
 
 'use strict';
 
 var path = require('path');
+
+/**
+ * Whether or not debug mode is on
+ * @member {boolean} DEBUG
+ */
 var DEBUG = true;
+
+/**
+ * Whether or not to be extra verbose in logging messages
+ * @member {boolean} VERBOSE
+ */
 var VERBOSE = false;
 
+/**
+ * Displays how to use the tool
+ * @function usage
+ */
 function usage() {
   console.log('grunt2gulp: converts Gruntfile.js to Gulp file, prints to stdout');
   console.log('Usage: ' + process.argv[0] + ' <gruntfiles...>');
 }
 
 // Output functions
+/**
+ * Displays a message if the debug flag is on
+ * @function debug
+ * @param {String} str The message to print
+ * @see [DEBUG]{@link module:grunt2gulp~DEBUG}
+ */
 function debug(str) {
   if (DEBUG) {
     console.error("/* DEBUG:", str, "*/");
   }
 }
 
+/**
+ * Displays a message if the verbose flag is on
+ * @function verbose
+ * @param {String} str The message to print
+ * @see [VERBOSE]{@link module:grunt2gulp~DEBUG}
+ */
 function verbose(str) {
   if (VERBOSE) {
     console.log("/*", str, "*/");
   }
 }
 
+/**
+ * Displays a message, if the parameter is undefined displays an empty
+ * string.
+ * @function out
+ * @param {String} str The message to print
+ */
 function out(str) {
   console.log(str === undefined ? '' : str);
 }
 
-// Class for converting grunt files to gulp
+/**
+ * Emulates the interface of `grunt`
+ * @class gruntConverter
+ * @classdesc Class for converting grunt files to gulp
+ */
 function gruntConverter() {
-  var tasks = [], taskNames = [],
-  definitions = [
-  ],
-  requires = [
-    'rename'
-  ],
-  gulpExcludedPackages = [
-    'grunt-contrib-watch'
-  ],
-  taskPrinters = Object.create(null);
+  /**
+   * The list of Grunt tasks
+   * @inner
+   * @default
+   */
+  var tasks = [];
+
+  /**
+   * The list of Grunt task names
+   * @inner
+   * @default
+   */
+  var taskNames = [];
+
+  /**
+   * The list of Gulp variable definitions
+   * @inner
+   * @default
+   */
+  var definitions = [];
+
+  /**
+   * The list of module names for Gulp to load via require
+   * @inner
+   * @default
+   */
+  var requires = ['rename'];
+
+  /**
+   * The list of modules that Gulp does not need to load
+   * @inner
+   * @default
+   */
+  var gulpExcludedPackages = ['grunt-contrib-watch'];
 
   // output functions
+  /**
+   * Prints out the pipe command for a Gulp file
+   * @param {String} str The argument to the pipe command.
+   * @inner
+   */
   function pipe(str) {
     out("    .pipe(" + str + ")");
   }
 
+  /**
+   * Prints out the gulp.dest command for a Gulp file
+   * @param {String} str The argument to the gulp.dest command.
+   * @inner
+   */
   function dest(str) {
     pipe("gulp.dest('" + str + "')");
   }
 
   // task-specific printers
+
+  /**
+   * An object containing task-specific printers. For example, the
+   * jshint task in Grunt needs to be output in a certain way for the
+   * Gulp file.
+   * @inner
+   * @default new Object
+   */
+  var taskPrinters = Object.create(null);
+
   taskPrinters['jshint'] = function (task) {
     pipe("jshint()");
     pipe("jshint.reporter('default')");
@@ -67,7 +150,14 @@ function gruntConverter() {
     dest(path.dirname(task.dest));
   }
 
-  // Processing grunt tasks
+  /**
+   * Processing grunt tasks into gulp tasks and adds them to [taskNames]{@link module:grunt2gulp~gruntConverter~taskNames}. Detects any potential duplicate tasks.
+   *
+   * @param {String} taskName The name of the gulp task.
+   * @param {Object.<String, Object>} src Dictionary of source files, the key is the filename, the value is the module.
+   * @param {String} dest The destination file. When this is set to 'files', the destination is not set for the added gulp task.
+   * @inner
+   */
   function processGruntTask(taskName, src, dest) {
     var file, gulpTask;
     for (file in src) {
@@ -89,6 +179,17 @@ function gruntConverter() {
     }
   }
 
+  /**
+   * Processes the grunt configuration for a task with options.
+   *
+   * @param {String} taskName The name of the grunt task
+   * @param {(Object|String)} options The configuration options for
+   * the grunt task. When passed as an object, can handle the src and
+   * dest configuration options. When passed as a string, assumes that
+   * it is a destination path.
+   * @see [processGruntTask]{@link module:grunt2gulp~gruntConverter~processGruntTask}
+   * @inner
+   */
   function processGruntConfig(taskName, options) {
     var key, option, gulpTask, src, dest;
     if (typeof options === 'object') {
@@ -131,11 +232,27 @@ function gruntConverter() {
     }
   }
 
-  // printing out the gulp versions of the grunt tasks
+  /**
+   * Prints out the gulp versions of the grunt tasks
+   *
+   * @param {Object} definition The task
+   * @param {String} definition.name The name of a gulp task
+   * @param {String} definition.value The value of the gulp task, typically a pipe.
+   * @see [out]{@link module:grunt2gulp~out}
+   * @inner
+   */
   function printDefinition(definition) {
     out("var " + definition.name + " = " + definition.value + ";");
   }
 
+  /**
+   * Prints out a require statement for a gulp module. Prefixes the
+   * module name with 'gulp'.
+   *
+   * @param {String} moduleName The name of the module to require/load
+   * @see [out]{@link module:grunt2gulp~out}
+   * @inner
+   */
   function printRequire(moduleName) {
     var name = moduleName;
     if (moduleName !== 'gulp') {
@@ -144,6 +261,14 @@ function gruntConverter() {
     out("var " + moduleName + " = require('" + name + "');");
   }
 
+  /**
+   * Prints out the gulp task definition.
+   *
+   * @param {Object} task The gulp task
+   * @param {boolean} task._isDuplicate Whether or not the task is a potential duplicate
+   * @see [out]{@link module:grunt2gulp~out}
+   * @inner
+   */
   function printTask(task) {
     var duplicate = '';
     if ('_isDuplicate' in task && task._isDuplicate) {
@@ -165,12 +290,28 @@ function gruntConverter() {
     }
   }
 
+  /**
+   * Prints out a gulp task for watching files. Similar to grunt watch.
+   *
+   * @param {Object} task The gulp task
+   * @param {String} task.name The name of the gulp task
+   * @param {String} task.src The source file of the task
+   * @inner
+   */
   function printWatchTask(task) {
     out("gulp.task('" + task.name + "', function () {");
     out("  gulp.watch('" + task.src + "', [ /* dependencies */ ]);");
     out("});");
   }
 
+  /**
+   * Prints out a gulp task for running Karma test runner.
+   *
+   * @param {Object} task The gulp task
+   * @param {Object} task.src The source object of the gulp task
+   * @param {Object} task.src.options The options provided to the karma task
+   * @inner
+   */
   function printKarmaTask(task) {
     out("gulp.task('test', function (done) {");
     out("  karma.start(");
@@ -179,7 +320,13 @@ function gruntConverter() {
     out("});");
   }
 
-  // prints out all the require statements and tasks in gulp format
+  /**
+   * Prints out all the require statements and tasks in gulp format.
+   *
+   * @method print
+   * @memberof module:grunt2gulp~gruntConverter
+   * @instance
+   */
   this.print = function() {
     var i;
     printRequire('gulp');
@@ -206,11 +353,27 @@ function gruntConverter() {
   }
 
   // Grunt API Methods
+  /**
+   * File object.
+   *
+   * @memberof module:grunt2gulp~gruntConverter
+   * @member {Object} file
+   * @instance
+   */
   this.file = {
     readJSON: function (path) {
     }
   }
 
+  /**
+   * Processes the given grunt config.
+   *
+   * @param {Object.<String, Object>} config
+   * @see [processGruntConfig]{@link module:grunt2gulp~gruntConverter~processGruntConfig}
+   * @method initConfig
+   * @memberof module:grunt2gulp~gruntConverter
+   * @instance
+   */
   this.initConfig = function(config) {
     var task;
     for (task in config) {
@@ -218,6 +381,17 @@ function gruntConverter() {
     }
   }
 
+  /**
+   * Adds the given npm package name to the [requires]{@link
+   * module:grunt2gulp~gruntConverter~requires} list. If the prefix
+   * 'grunt-contrib-' or 'grunt-' is used in the npmPackageName,
+   * removes the prefix and then adds it to the requires list.
+   *
+   * @param {String} npmPackageName The name of the NPM-installable package
+   * @method loadNpmTasks
+   * @memberof module:grunt2gulp~gruntConverter
+   * @instance
+   */
   this.loadNpmTasks = function(npmPackageName) {
     if (gulpExcludedPackages.indexOf(npmPackageName) === 0) {
     } else if (npmPackageName.indexOf('grunt-contrib-') === 0) {
@@ -229,6 +403,15 @@ function gruntConverter() {
     }
   }
 
+  /**
+   * Registers a grunt task
+   *
+   * @param {String} name The name of the grunt task
+   * @param {String[]} dependencies The dependencies of the grunt task
+   * @method registerTask
+   * @memberof module:grunt2gulp~gruntConverter
+   * @instance
+   */
   this.registerTask = function(name, dependencies) {
     var task = Object.create(null);
     task.name = name;
@@ -238,6 +421,12 @@ function gruntConverter() {
 
 }
 
+/**
+ * Given the full path to a Gruntfile.js file, attempts to convert a
+ * Gruntfile into a gulpfile using [gruntConverter]{@link module:grunt2gulp~gruntConverter}.
+ *
+ * @param {String} filename The Gruntfile to load
+ */
 function convertGruntFile(filename) {
   var module = require(filename), converter = new gruntConverter();
   module(converter);
