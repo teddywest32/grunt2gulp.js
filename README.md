@@ -51,6 +51,12 @@ task running capability and all the other stuff.
 The core functions you will want to check out are `processGruntTask`
 and `processGruntConfig`.
 
+## Documentation
+
+You can generate the documentation using `jsdoc`:
+
+    jsdoc node_modules/grunt2gulp/bin/grunt2gulp.js
+
 # License
 
 Licensed under the GPL.
