@@ -261,9 +261,21 @@ function gruntConverter() {
     if (moduleName !== 'gulp') {
       name = 'gulp-' + moduleName;
     }
-    out("var " + moduleName + " = require('" + name + "');");
+    out("var " + camelCase(moduleName) + " = require('" + name + "');");
   }
 
+  /**
+   * Given a string with hyphens (-), return a camel cased string
+   * e.g. quick-brown-fox returns quickBrownFox
+   *
+   * @param {String} input the string to camel case
+   * @inner
+   */
+  function camelCase(input) {
+    return input.toLowerCase().replace(/-(.)/g, function(match, group1) {
+      return group1.toUpperCase();
+    });
+  }
   /**
    * Prints out the gulp task definition.
    *
