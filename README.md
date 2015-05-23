@@ -51,6 +51,12 @@ task running capability and all the other stuff.
 The core functions you will want to check out are `processGruntTask`
 and `processGruntConfig`.
 
+## How to Report Issues
+
+When reporting an issue with grunt2gulp.js, please try to include the Gruntfile that you were trying to convert and the error message that you received.
+
+You can report issues here: https://github.com/omouse/grunt2gulp.js/issues
+
 ## Documentation
 
 You can generate the documentation using `jsdoc`:
