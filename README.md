@@ -61,6 +61,6 @@ You can generate the documentation using `jsdoc`:
 
 Licensed under the GPL.
 
-Copyright (C) 2014 Rudolf Olah <omouse@gmail.com>
+Copyright (C) 2014-2015 Rudolf Olah <omouse@gmail.com>
 
 See [LICENSE](./LICENSE) for full text of license.
