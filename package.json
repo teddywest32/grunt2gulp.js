@@ -4,7 +4,7 @@
   "description": "converts Gruntfile.js to a gulpjs-compatible file",
   "main": "bin/grunt2gulp.js",
   "bin": {
-    "grunt2gulp": "grunt2gulp.js"
+    "grunt2gulp": "bin/grunt2gulp.js"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
