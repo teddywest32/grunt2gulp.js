@@ -459,6 +459,16 @@ if (gruntFiles.length == 0) {
   usage();
 } else {
   for (i = 0; i < gruntFiles.length; i += 1) {
-    convertGruntFile(path.resolve(gruntFiles[i]));
+    try {
+      convertGruntFile(path.resolve(gruntFiles[i]));
+    } catch (e) {
+      var moduleNameRegex = /Cannot find module '(.*)'/i;
+      var moduleName = moduleNameRegex.exec(e.message);
+      if (moduleName) {
+        console.log('Please install this module: ' + moduleName[1]);
+      } else {
+        throw e;
+      }
+    }
   }
 }
