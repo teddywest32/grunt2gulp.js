@@ -5,6 +5,7 @@
 
 'use strict';
 
+var fs = require('fs');
 var path = require('path');
 
 /**
@@ -429,17 +430,37 @@ function gruntConverter() {
    *
    * @param {String} name The name of the grunt task
    * @param {String[]} dependencies The dependencies of the grunt task
+   * @param {Function|null} body Optional function body of the task
    * @method registerTask
    * @memberof module:grunt2gulp~gruntConverter
    * @instance
    */
-  this.registerTask = function(name, dependencies) {
+  this.registerTask = function(name, dependencies, body) {
     var task = Object.create(null);
     task.name = name;
     task.dependencies = dependencies;
+    task.body = body;
     tasks.push(task);
   }
 
+}
+
+/**
+ * Linter for the given Gruntfile.js, scans for anything that will make
+ * conversion to gulp an issue. Prints an error message and exits if there are
+ * any issues.
+ *
+ * Assumes the Gruntfile uses UTF-8 encoding.
+ * @param {String} gruntFilename
+ */
+function lintGruntFile(gruntFilename) {
+  var data = fs.readFileSync(gruntFilename, 'utf-8');
+  var requireTimerRegex = /require.*(time-grunt|grunt-timer).*/;
+  var requireTimer = requireTimerRegex.exec(data);
+  if (requireTimer) {
+    console.log('Please remove "' + requireTimer[1] + '" from the Gruntfile');
+    process.exit(10);
+  }
 }
 
 /**
@@ -460,7 +481,9 @@ if (gruntFiles.length == 0) {
 } else {
   for (i = 0; i < gruntFiles.length; i += 1) {
     try {
-      convertGruntFile(path.resolve(gruntFiles[i]));
+      var gruntFile = path.resolve(gruntFiles[i]);
+      lintGruntFile(gruntFile);
+      convertGruntFile(gruntFile);
     } catch (e) {
       var moduleNameRegex = /Cannot find module '(.*)'/i;
       var moduleName = moduleNameRegex.exec(e.message);
