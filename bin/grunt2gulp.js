@@ -465,12 +465,16 @@ if (gruntFiles.length == 0) {
       var moduleNameRegex = /Cannot find module '(.*)'/i;
       var moduleName = moduleNameRegex.exec(e.message);
       if (moduleName) {
-        if (moduleName[1].indexOf('.json') !== -1) {
-          console.log('Please create this JSON file: ' + moduleName[1]);
+        if (moduleName[1].indexOf('./') !== -1) {
+          console.log('Please move any files imported with a relative into ' +
+            'the same directory as the Gruntfile: ' + moduleName[1]);
           process.exit(2);
+        } else if (moduleName[1].indexOf('.json') !== -1) {
+          console.log('Please create this JSON file: ' + moduleName[1]);
+          process.exit(3);
         } else {
           console.log('Please install this module: ' + moduleName[1]);
-          process.exit(3);
+          process.exit(4);
         }
       } else {
         throw e;
