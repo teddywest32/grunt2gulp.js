@@ -465,7 +465,13 @@ if (gruntFiles.length == 0) {
       var moduleNameRegex = /Cannot find module '(.*)'/i;
       var moduleName = moduleNameRegex.exec(e.message);
       if (moduleName) {
-        console.log('Please install this module: ' + moduleName[1]);
+        if (moduleName[1].indexOf('.json') !== -1) {
+          console.log('Please create this JSON file: ' + moduleName[1]);
+          process.exit(2);
+        } else {
+          console.log('Please install this module: ' + moduleName[1]);
+          process.exit(3);
+        }
       } else {
         throw e;
       }
