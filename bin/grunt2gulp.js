@@ -416,7 +416,9 @@ function gruntConverter() {
   this.initConfig = function(config) {
     var task;
     for (task in config) {
-      processGruntConfig(task, config[task]);
+      if (config.hasOwnProperty(task)) {
+        processGruntConfig(task, config[task]);
+      }
     }
   }
 
