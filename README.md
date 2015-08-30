@@ -1,5 +1,7 @@
 # grunt2gulp
 
+[![Codacy Badge](https://api.codacy.com/project/badge/7174ac139c9e42fabec2ebc1df48de8a)](https://www.codacy.com/app/omouse/grunt2gulp-js)
+
 Converts a Gruntfile.js to a gulp-compliant file. Why? Because if
 you're going to create a new tool to replace an old one, why not
 automate the process of porting configuration files over.
