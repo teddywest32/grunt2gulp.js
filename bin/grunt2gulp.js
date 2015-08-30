@@ -495,7 +495,7 @@ function convertGruntFile(filename) {
 }
 
 var i, gruntFiles = process.argv.slice(2);
-if (gruntFiles.length == 0) {
+if (gruntFiles.length === 0) {
   usage();
 } else {
   for (i = 0; i < gruntFiles.length; i += 1) {
