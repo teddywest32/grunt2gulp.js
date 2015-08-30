@@ -38,7 +38,7 @@ function usage() {
  */
 function debug(str) {
   if (DEBUG) {
-    console.error("/* DEBUG:", str, "*/");
+    console.error("DEBUG:", str);
   }
 }
 
@@ -307,9 +307,14 @@ function gruntConverter() {
       out("  return gulp");
       out("    .src('" + task.src + "')");
       if (task.name in taskPrinters) {
+        verbose('Found task in taskPrinters: ' + task.name);
         taskPrinters[task.name](task);
       } else if ('dest' in task && task.dest !== undefined) {
+        verbose('Printing task destination: ' + task.name);
         console.log("    .pipe(gulp.dest('" + task.dest + "'))");
+      } else {
+        debug('Task not found in taskPrinters or destination file is ' +
+          'undefined: ' + task.name + ', ' + task.dest);
       }
       out("  ;");
       out("});");
