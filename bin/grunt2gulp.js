@@ -162,21 +162,23 @@ function gruntConverter() {
   function processGruntTask(taskName, src, dest) {
     var file, gulpTask;
     for (file in src) {
-      gulpTask = Object.create(null);
-      gulpTask.name = taskName;
-      gulpTask.src = src[file];
-      if (dest !== 'files') {
-        gulpTask.dest = dest;
-      }
+      if (src.hasOwnProperty(file)) {
+        gulpTask = Object.create(null);
+        gulpTask.name = taskName;
+        gulpTask.src = src[file];
+        if (dest !== 'files') {
+          gulpTask.dest = dest;
+        }
 
-      // check for duplicate gulp task names
-      if (taskNames.indexOf(gulpTask.name) !== -1) {
-        gulpTask._isDuplicate = true;
-      } else {
-        taskNames.push(gulpTask.name);
-      }
+        // check for duplicate gulp task names
+        if (taskNames.indexOf(gulpTask.name) !== -1) {
+          gulpTask._isDuplicate = true;
+        } else {
+          taskNames.push(gulpTask.name);
+        }
 
-      tasks.push(gulpTask);
+        tasks.push(gulpTask);
+      }
     }
   }
 
