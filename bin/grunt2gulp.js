@@ -193,6 +193,12 @@ function gruntConverter() {
    */
   function processGruntConfig(taskName, options) {
     var key, option, gulpTask, src, dest;
+    function processFileList(fileList) {
+      for (var i = 0; i < fileList.length; i += 1) {
+        src.push(fileList[i].src);
+        dest.push(fileList[i].dest);
+      }
+    }
     if (typeof options === 'object') {
       for (option in options) {
         if (option === 'options') {
@@ -217,8 +223,12 @@ function gruntConverter() {
               src = [];
               dest = [];
               for (key in options[option].files) {
-                src.push(options[option].files[key]);
-                dest.push(key);
+                if (typeof options[option].files[key] === 'object') {
+                  processFileList(options[option].files[key]);
+                } else {
+                  src.push(options[option].files[key]);
+                  dest.push(key);
+                }
               }
             }
           } else {
