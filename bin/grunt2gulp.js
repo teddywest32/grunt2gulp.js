@@ -150,6 +150,11 @@ function gruntConverter() {
     pipe("concat('all.js')");
     dest(path.dirname(task.dest));
   }
+  
+  taskPrinters['wiredep'] = function wiredep(task) {
+    pipe('wiredep()');
+    dest(path.dirname(task.dest));
+  }
 
   /**
    * Processing grunt tasks into gulp tasks and adds them to [taskNames]{@link module:grunt2gulp~gruntConverter~taskNames}. Detects any potential duplicate tasks.
