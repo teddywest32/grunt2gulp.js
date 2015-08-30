@@ -135,18 +135,18 @@ function gruntConverter() {
    */
   var taskPrinters = Object.create(null);
 
-  taskPrinters['jshint'] = function (task) {
+  taskPrinters['jshint'] = function() {
     pipe("jshint()");
     pipe("jshint.reporter('default')");
   }
 
-  taskPrinters['uglify'] = function (task) {
+  taskPrinters['uglify'] = function(task) {
     pipe("rename('all.min.js')");
     pipe("uglify()");
     dest(path.dirname(task.dest));
   }
 
-  taskPrinters['concat'] = function (task) {
+  taskPrinters['concat'] = function(task) {
     pipe("concat('all.js')");
     dest(path.dirname(task.dest));
   }
