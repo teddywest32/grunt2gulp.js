@@ -155,6 +155,10 @@ function gruntConverter() {
     pipe('wiredep()');
     dest(path.dirname(task.dest));
   }
+  
+  taskPrinters['filerev'] = function filerev(task) {
+    // TODO: #15 custom filerev taskPrinter
+  }
 
   /**
    * Processing grunt tasks into gulp tasks and adds them to [taskNames]{@link module:grunt2gulp~gruntConverter~taskNames}. Detects any potential duplicate tasks.
