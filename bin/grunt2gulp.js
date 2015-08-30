@@ -394,7 +394,10 @@ function gruntConverter() {
    * @instance
    */
   this.file = {
-    readJSON: function (path) {
+    /**
+     * Does nothing.
+     */
+    readJSON: function() {
     }
   }
 
