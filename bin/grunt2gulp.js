@@ -194,7 +194,7 @@ function gruntConverter() {
    * @inner
    */
   function processGruntConfig(taskName, options) {
-    var key, option, gulpTask, src, dest;
+    var key, option, src, dest;
     function processFileList(fileList) {
       for (var i = 0; i < fileList.length; i += 1) {
         src.push(fileList[i].src);
