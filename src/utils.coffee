@@ -1,3 +1,6 @@
+path = require 'path'
+fs = require 'fs'
+
 # Whether or not debug mode is on
 DEBUG = true;
 
