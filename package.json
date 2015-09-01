@@ -8,7 +8,7 @@
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "preinstall": "cat src/utils.coffee src/gulplike.coffee src/taskprinters.coffee src/gruntlike.coffee | coffee --bare --compile --stdio > bin/grunt2gulp.js"
+    "preinstall": "cat src/utils.coffee src/gulplike.coffee src/taskprinters.coffee src/gruntlike.coffee src/main.coffee | coffee --bare --compile --stdio > bin/grunt2gulp.js"
   },
   "keywords": [
     "grunt",

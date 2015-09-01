@@ -56,7 +56,7 @@ lintGruntFile = (gruntFilename) ->
     requireTimerRegex = /require.*(time-grunt|grunt-timer).*/
     requireTimer = requireTimerRegex.exec data
     if requireTimer
-        console.log 'Please remove "' + requireTimer[1] + '" from the Gruntfile'
+        console.log "Please remove \"#{requireTimer[1]\" from the Gruntfile"
         process.exit 10
 
 convertGruntFile = (filename) ->
