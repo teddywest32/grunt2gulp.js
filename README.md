@@ -10,6 +10,19 @@ In the future, a standard for building JavaScript files should emerge
 and be usable by whatever build tools exist. Maybe something like GNU
 Make? Ah, but that's a mere fantasy...
 
+## Install/Build grunt2gulp.js
+
+Grunt2Gulp is now written in CoffeeScript which means it has to be
+built before it can be installed.
+
+To build grunt2gulp.js you can run this:
+
+    npm run preinstall
+
+When you install grunt2gulp.js the preinstall command will be run
+which will compile the coffee script files into the bin/grunt2gulp.js
+file.
+
 ## Usage
 
 Print out a gulp file to standard output:
