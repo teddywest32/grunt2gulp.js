@@ -7,7 +7,8 @@
     "grunt2gulp": "bin/grunt2gulp.js"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "preinstall": "cat src/utils.coffee src/gulplike.coffee src/taskprinters.coffee src/gruntlike.coffee | coffee --compile --stdio > bin/grunt2gulp.js"
   },
   "keywords": [
     "grunt",
