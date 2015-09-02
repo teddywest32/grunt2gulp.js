@@ -6,7 +6,7 @@
     <title>Grunt2gulp.js by omouse</title>
 
     <link rel="stylesheet" href="stylesheets/styles.css">
-    <link rel="stylesheet" href="stylesheets/pygment_trac.css">
+    <link rel="stylesheet" href="stylesheets/github-dark.css">
     <script src="javascripts/scale.fix.js"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
 
@@ -28,7 +28,11 @@
       </header>
       <section>
         <h1>
-<a name="grunt2gulp" class="anchor" href="#grunt2gulp"><span class="octicon octicon-link"></span></a>grunt2gulp</h1>
+<a id="grunt2gulp" class="anchor" href="#grunt2gulp" aria-hidden="true"><span class="octicon octicon-link"></span></a>grunt2gulp</h1>
+
+<p><img src="grunt2gulp-logo.png" alt="Grunt2Gulp Logo"></p>
+
+<p><a href="https://www.codacy.com/app/omouse/grunt2gulp-js"><img src="https://api.codacy.com/project/badge/7174ac139c9e42fabec2ebc1df48de8a" alt="Codacy Badge"></a></p>
 
 <p>Converts a Gruntfile.js to a gulp-compliant file. Why? Because if
 you're going to create a new tool to replace an old one, why not
@@ -39,7 +43,7 @@ and be usable by whatever build tools exist. Maybe something like GNU
 Make? Ah, but that's a mere fantasy...</p>
 
 <h2>
-<a name="usage" class="anchor" href="#usage"><span class="octicon octicon-link"></span></a>Usage</h2>
+<a id="usage" class="anchor" href="#usage" aria-hidden="true"><span class="octicon octicon-link"></span></a>Usage</h2>
 
 <p>Print out a gulp file to standard output:</p>
 
@@ -52,7 +56,7 @@ Make? Ah, but that's a mere fantasy...</p>
 </code></pre>
 
 <h2>
-<a name="drawbacks-caveats" class="anchor" href="#drawbacks-caveats"><span class="octicon octicon-link"></span></a>Drawbacks, Caveats</h2>
+<a id="drawbacks-caveats" class="anchor" href="#drawbacks-caveats" aria-hidden="true"><span class="octicon octicon-link"></span></a>Drawbacks, Caveats</h2>
 
 <p>This is a very very rough tool, you will <strong>need</strong> to go over the
 generated gulp file to ensure that it works and is correct.</p>
@@ -65,7 +69,7 @@ tweaking to get it to that state.</p>
 <p>If there are duplicate tasks, a warning is added to the code.</p>
 
 <h1>
-<a name="how-does-it-work" class="anchor" href="#how-does-it-work"><span class="octicon octicon-link"></span></a>How does it work?</h1>
+<a id="how-does-it-work" class="anchor" href="#how-does-it-work" aria-hidden="true"><span class="octicon octicon-link"></span></a>How does it work?</h1>
 
 <p>It loads up the Gruntfile and emulates Grunt's API. When it's done
 looping through all the tasks in the grunt config, it shoves them into
@@ -75,7 +79,7 @@ into Gulp tasks but some special cases have to be handled, such as
 Karma and Watch.</p>
 
 <h2>
-<a name="hacking-on-grunt2gulp" class="anchor" href="#hacking-on-grunt2gulp"><span class="octicon octicon-link"></span></a>Hacking on grunt2gulp</h2>
+<a id="hacking-on-grunt2gulp" class="anchor" href="#hacking-on-grunt2gulp" aria-hidden="true"><span class="octicon octicon-link"></span></a>Hacking on grunt2gulp</h2>
 
 <p>The code is dirty because Grunt is very permissive in its input. You
 can specify files in multiple ways: as a string, as a list of strings,
@@ -87,12 +91,27 @@ task running capability and all the other stuff.</p>
 <p>The core functions you will want to check out are <code>processGruntTask</code>
 and <code>processGruntConfig</code>.</p>
 
+<h2>
+<a id="how-to-report-issues" class="anchor" href="#how-to-report-issues" aria-hidden="true"><span class="octicon octicon-link"></span></a>How to Report Issues</h2>
+
+<p>When reporting an issue with grunt2gulp.js, please try to include the Gruntfile that you were trying to convert and the error message that you received.</p>
+
+<p>You can report issues here: <a href="https://github.com/omouse/grunt2gulp.js/issues">https://github.com/omouse/grunt2gulp.js/issues</a></p>
+
+<h2>
+<a id="documentation" class="anchor" href="#documentation" aria-hidden="true"><span class="octicon octicon-link"></span></a>Documentation</h2>
+
+<p>You can generate the documentation using <code>jsdoc</code>:</p>
+
+<pre><code>jsdoc node_modules/grunt2gulp/bin/grunt2gulp.js
+</code></pre>
+
 <h1>
-<a name="license" class="anchor" href="#license"><span class="octicon octicon-link"></span></a>License</h1>
+<a id="license" class="anchor" href="#license" aria-hidden="true"><span class="octicon octicon-link"></span></a>License</h1>
 
-<p>Licensed under the MIT license.</p>
+<p>Licensed under the GPL.</p>
 
-<p>Copyright (C) 2014 Rudolf Olah <a href="mailto:omouse@gmail.com">omouse@gmail.com</a></p>
+<p>Copyright (C) 2014-2015 Rudolf Olah <a href="mailto:omouse@gmail.com">omouse@gmail.com</a></p>
 
 <p>See <a href="./LICENSE">LICENSE</a> for full text of license.</p>
       </section>
