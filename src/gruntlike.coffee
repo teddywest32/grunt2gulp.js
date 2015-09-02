@@ -12,14 +12,13 @@ class GruntConverter
         @file =
             readJSON: () ->
 
-    ###
-    Processing grunt tasks into gulp tasks and adds them to taskNames.
-
-    @param {string} taskName - The name of the gulp task
-    @param {object.<string, object>} src - Dictionary of source files, the key
-    is the filename, the value is the module.
-    @param {String} dest The destination file. When this is set to 'files', the
-    destination is not set for the added gulp task.
+    ###*
+    * Processing grunt tasks into gulp tasks and adds them to taskNames.
+    *
+    * @param {string} taskName - The name of the gulp task
+    * @param {object.<string, object>} src - Dictionary of source files, the key is the filename, the value is the module.
+    * @param {String} dest The destination file. When this is set to 'files', the
+    * destination is not set for the added gulp task.
     ###
     processGruntTask: (taskName, src, dest) ->
         for own file, module of src
