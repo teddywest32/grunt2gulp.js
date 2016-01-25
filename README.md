@@ -4,6 +4,8 @@
 
 [![Codacy Badge](https://api.codacy.com/project/badge/7174ac139c9e42fabec2ebc1df48de8a)](https://www.codacy.com/app/omouse/grunt2gulp-js)
 
+[Download it on NPM](https://www.npmjs.com/package/grunt2gulp): `npm install grunt2gulp`
+
 Converts a Gruntfile.js to a gulp-compliant file. Why? Because if
 you're going to create a new tool to replace an old one, why not
 automate the process of porting configuration files over.
@@ -69,8 +71,8 @@ You can generate the documentation using `jsdoc`:
 
 # License
 
-Licensed under the GPL.
+Licensed under the GPL version 3 or later.
 
-Copyright (C) 2014-2015 Rudolf Olah <omouse@gmail.com>
+Copyright (C) 2014-2016 Rudolf Olah <omouse@gmail.com>
 
 See [LICENSE](./LICENSE) for full text of license.
