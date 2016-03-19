@@ -76,3 +76,17 @@ Licensed under the GPL version 3 or later.
 Copyright (C) 2014-2016 Rudolf Olah <omouse@gmail.com>
 
 See [LICENSE](./LICENSE) for full text of license.
+
+# Known Issues With Gruntfiles
+
+The following is a list of issues that you will have to correct
+yourself before trying to convert a Gruntfile. These are issues that
+are found by the linter (lintGruntFile).
+
+Most of these issues can be fixed simply by removing or commenting out
+the offending line in the Gruntfile but will typically require extra
+work to be done to work as a gulpfile.
+
+## grunt.loadTasks or grunt.task.loadTasks
+
+[LoadTasks will load custom-defined tasks for Grunt](http://gruntjs.com/api/grunt.task#grunt.task.loadtasks). You will have to convert those tasks to work with gulp. The guide on [writing a plugin for gulp](https://github.com/gulpjs/gulp/blob/master/docs/writing-a-plugin/README.md) is a good starting point.
