@@ -1,6 +1,6 @@
 # grunt2gulp
 
-![Grunt2Gulp Logo](grunt2gulp-logo.png)
+![Grunt2Gulp Logo](https://github.com/omouse/grunt2gulp.js/blob/master/grunt2gulp-logo.png)
 
 [![Codacy Badge](https://api.codacy.com/project/badge/7174ac139c9e42fabec2ebc1df48de8a)](https://www.codacy.com/app/omouse/grunt2gulp-js)
 
