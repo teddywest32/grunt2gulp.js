@@ -486,11 +486,17 @@ function gruntConverter() {
  */
 function lintGruntFile(gruntFilename) {
   var data = fs.readFileSync(gruntFilename, 'utf-8');
-  var requireTimerRegex = /require.*(time-grunt|grunt-timer).*/;
-  var requireTimer = requireTimerRegex.exec(data);
-  if (requireTimer) {
-    console.log('Please remove "' + requireTimer[1] + '" from the Gruntfile');
-    process.exit(10);
+
+  exitIfRegexIsFound(/require.*(time-grunt|grunt-timer).*/);
+  exitIfRegexIsFound(/(loadTasks.*);/);
+
+  function exitIfRegexIsFound(regex) {
+    var match = regex.exec(data);
+    if (match) {
+      console.log('Please remove "' + match[1] + '" from the Gruntfile.');
+      console.log('See the "Known Issues With Gruntfiles" section in the grunt2gulp README.md for more information.');
+      process.exit(10);
+    }
   }
 }
 
