@@ -87,6 +87,10 @@ Most of these issues can be fixed simply by removing or commenting out
 the offending line in the Gruntfile but will typically require extra
 work to be done to work as a gulpfile.
 
+## time-grunt or grunt-timer
+
+It is useful to know how long a task runs for. With Grunt you would use time-grunt or the grunt-timer package. In gulp, you can use the [gulp-duration](https://github.com/hughsk/gulp-duration) and/or the [time-require](https://github.com/jaguard/time-require) packages.
+
 ## grunt.loadTasks or grunt.task.loadTasks
 
 [LoadTasks will load custom-defined tasks for Grunt](http://gruntjs.com/api/grunt.task#grunt.task.loadtasks). You will have to convert those tasks to work with gulp. The guide on [writing a plugin for gulp](https://github.com/gulpjs/gulp/blob/master/docs/writing-a-plugin/README.md) is a good starting point.
