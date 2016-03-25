@@ -14,6 +14,13 @@ In the future, a standard for building JavaScript files should emerge
 and be usable by whatever build tools exist. Maybe something like GNU
 Make? Ah, but that's a mere fantasy...
 
+## Installation
+
+It's *strongly* preferable to install grunt2gulp using the Github repo
+rather than from the central NPM:
+
+    npm install https://github.com/omouse/grunt2gulp.js/archive/0.0.2-cool-card.tar.gz
+
 ## Usage
 
 Print out a gulp file to standard output:
