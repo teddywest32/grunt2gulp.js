@@ -1,6 +1,6 @@
 # grunt2gulp
 
-![Grunt2Gulp Logo](grunt2gulp-logo.png)
+![Grunt2Gulp Logo](https://github.com/omouse/grunt2gulp.js/blob/master/grunt2gulp-logo.png)
 
 [![Codacy Badge](https://api.codacy.com/project/badge/7174ac139c9e42fabec2ebc1df48de8a)](https://www.codacy.com/app/omouse/grunt2gulp-js)
 
@@ -13,6 +13,13 @@ automate the process of porting configuration files over.
 In the future, a standard for building JavaScript files should emerge
 and be usable by whatever build tools exist. Maybe something like GNU
 Make? Ah, but that's a mere fantasy...
+
+## Installation
+
+It's *strongly* preferable to install grunt2gulp using the Github repo
+rather than from the central NPM:
+
+    npm install https://github.com/omouse/grunt2gulp.js/archive/0.0.2-cool-card.tar.gz
 
 ## Usage
 
@@ -76,3 +83,21 @@ Licensed under the GPL version 3 or later.
 Copyright (C) 2014-2016 Rudolf Olah <omouse@gmail.com>
 
 See [LICENSE](./LICENSE) for full text of license.
+
+# Known Issues With Gruntfiles
+
+The following is a list of issues that you will have to correct
+yourself before trying to convert a Gruntfile. These are issues that
+are found by the linter (lintGruntFile).
+
+Most of these issues can be fixed simply by removing or commenting out
+the offending line in the Gruntfile but will typically require extra
+work to be done to work as a gulpfile.
+
+## time-grunt or grunt-timer
+
+It is useful to know how long a task runs for. With Grunt you would use time-grunt or the grunt-timer package. In gulp, you can use the [gulp-duration](https://github.com/hughsk/gulp-duration) and/or the [time-require](https://github.com/jaguard/time-require) packages.
+
+## grunt.loadTasks or grunt.task.loadTasks
+
+[LoadTasks will load custom-defined tasks for Grunt](http://gruntjs.com/api/grunt.task#grunt.task.loadtasks). You will have to convert those tasks to work with gulp. The guide on [writing a plugin for gulp](https://github.com/gulpjs/gulp/blob/master/docs/writing-a-plugin/README.md) is a good starting point.
